@@ -1,4 +1,6 @@
 // 实现一个并发请求控制器
+// 得物 一面 手写题
+
 const limitRequest = (fnArr, limit) => {
   return new Promise((resolve, reject) => {
     let count = 0;
