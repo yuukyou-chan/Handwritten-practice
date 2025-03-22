@@ -5,7 +5,7 @@ function compose(...funcs) {
   if (funcs.length === 0) return (ags) => ags;
   if (funcs.length === 1) return funcs[0];
   return function (x) {
-    return funcs.reduce((pre, cur) => () => pre(cur(x)));
+    return funcs.reduce((pre, cur) => cur(pre), x);
   };
 }
 
@@ -22,3 +22,16 @@ function compose2(...funcs) {
   }
   return inner;
 }
+
+const add1 = (x) => x + 1;
+const multiply2 = (x) => x * 2;
+const square = (x) => x * x;
+
+const composedFunction = compose(square, multiply2, add1);
+const result = composedFunction(2);
+// 等价于 square(multiply2(add1(2)))
+// 等价于 square(multiply2(3))
+// 等价于 square(6)
+// 结果是 36
+
+console.log(result); // 输出: 36

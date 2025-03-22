@@ -36,3 +36,18 @@ function curringAdd() {
 console.log(curringAdd(1, 2, 3)(4)(5)());
 
 // 实现add(1)(2)(3)
+function add() {
+  const args = Array.from(arguments);
+  const allParams = [...args];
+  function inner(...args2) {
+    if (args2.length >= 1) {
+      allParams.push(...args2);
+      return inner;
+    } else {
+      return allParams.reduce((pre, curr) => {
+        return pre + curr;
+      }, 0);
+    }
+  }
+  return inner;
+}
