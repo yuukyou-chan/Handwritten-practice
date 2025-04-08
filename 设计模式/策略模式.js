@@ -45,7 +45,5 @@ class MessageManager {
   }
 }
 
-// 使用方式
+// 使用方式（不需要实例化，直接调用类上的方法即可）
 MessageManager.format(1000);
-
-//
