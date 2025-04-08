@@ -73,7 +73,7 @@ let p5 = () =>
 
 const limitRequest2 = (fnArr, limit) => {
   return new Promise((resolve, reject) => {
-    let count = 0; // 当前正在执行的请求数量
+    // let count = 0; // 当前正在执行的请求数量
     let currPosition = 0; // 当前处理的请求索引
     const resContainer = new Array(fnArr.length); // 结果容器，长度固定为 fnArr.length
 
@@ -87,7 +87,7 @@ const limitRequest2 = (fnArr, limit) => {
           reject(error); // 如果任何一个请求失败，立即返回失败原因
         })
         .finally(() => {
-          count--; // 当前请求完成，减少正在执行的请求数量
+          // count--; // 当前请求完成，减少正在执行的请求数量
           if (currPosition < fnArr.length) {
             request(currPosition); // 启动下一个请求
             currPosition++; // 移动到下一个索引
@@ -102,7 +102,7 @@ const limitRequest2 = (fnArr, limit) => {
 
     // 启动初始的请求（不超过并发限制）
     for (let i = 0; i < Math.min(limit, fnArr.length); i++) {
-      count++;
+      // count++;
       request(currPosition);
       currPosition++;
     }
