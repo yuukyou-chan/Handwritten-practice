@@ -5,7 +5,7 @@ function compose(...funcs) {
   if (funcs.length === 0) return (ags) => ags;
   if (funcs.length === 1) return funcs[0];
   return function (x) {
-    return funcs.reduce((pre, cur) => cur(pre), x);
+    return funcs.reduceRight((pre, cur) => cur(pre), x);
   };
 }
 

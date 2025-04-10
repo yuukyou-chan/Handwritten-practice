@@ -1,6 +1,6 @@
 class Observer {
   constructor() {
-    this.events = [];
+    this.events = {};
   }
 
   on(name, fn) {
