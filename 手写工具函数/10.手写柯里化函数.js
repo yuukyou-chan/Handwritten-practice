@@ -51,3 +51,18 @@ function add() {
   }
   return inner;
 }
+
+// 通用柯里化函数
+function uniCurry(fn) {
+  return function curried(...args) {
+    const params = [...args];
+    return function inner(...args2) {
+      if (args2.length >= 1) {
+        params.push(...args2);
+        return inner;
+      } else {
+        return fn.apply(this, params);
+      }
+    };
+  };
+}

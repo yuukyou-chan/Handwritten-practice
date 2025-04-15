@@ -14,7 +14,7 @@ class Observer {
   emit(name) {
     const events = this.events[name];
     if (!events) return;
-    events.array.forEach((fn) => {
+    events.forEach((fn) => {
       fn();
     });
   }
@@ -27,7 +27,6 @@ class Observer {
   }
 
   // 字面一面手撕：额外实现一个once方法，只执行一次，然后删除这个事件的监听
-
   once(name, fn) {
     const onceFn = () => {
       fn();
