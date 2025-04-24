@@ -14,7 +14,7 @@ class Observer {
   emit(name) {
     const events = this.events[name];
     if (!events) return;
-    events.array.forEach((fn) => {
+    events.forEach((fn) => {
       fn();
     });
   }

@@ -51,3 +51,17 @@ function add() {
   }
   return inner;
 }
+
+// 通用版柯里化函数
+const curry = (fn) => {
+  return function curried() {
+    const params = Array.from(arguments);
+    return function inner(...args) {
+      if (args.length >= 1) {
+        params.push(...args);
+      } else {
+        return;
+      }
+    };
+  };
+};
