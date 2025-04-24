@@ -9,3 +9,5 @@ function cloneDeep(obj) {
   });
   return newObj;
 }
+
+// 支持循环引用
