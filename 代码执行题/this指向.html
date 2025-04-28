@@ -26,7 +26,10 @@
     var name = "渣渣前端";
 
     function foo() {
+      // this 指向只和调用方式有关，这里是 foo 函数调用，所以 this 指向 window
       console.log(this.name);
+      // 如果 是console.log(name) 则会向上层作用域查找 即 fooo 函数的作用域
+      // 所以打印的是 辣鸡前端
     }
 
     function fooo() {

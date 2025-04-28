@@ -26,7 +26,6 @@ class HourStrategy extends Kind {
     return `${Math.floor(diffMs / (60 * 1000))}分钟前`;
   }
 }
-
 // 策略管理器
 class MessageManager {
   constructor(time) {

@@ -42,3 +42,36 @@ const schedule = new Schedule(2);
 schedule.addTask("1", 1000).then(console.log);
 schedule.addTask("2", 500).then(console.log);
 schedule.addTask("3", 1000).then(console.log);
+
+class Schedule2 {
+  constructor(maxTaskCount) {
+    this.maxTaskCount = maxTaskCount;
+    this.taskQueue = [];
+    this.runningTaskCount = 0;
+  }
+  addTask(params, delay) {
+    return new Promise((res, rej) => {
+      this.taskQueue.push(
+        () =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              res(params);
+              resolve(params);
+            }, delay);
+          })
+      );
+    });
+  }
+
+  runTask() {
+    while (this.taskQueue.length && this.runningTaskCount < this.maxTaskCount) {
+      const task = this.taskQueue.shift();
+      this.runningTaskCount++;
+
+      task().finally((res) => {
+        this.runningTaskCount--;
+        this.runTask();
+      });
+    }
+  }
+}

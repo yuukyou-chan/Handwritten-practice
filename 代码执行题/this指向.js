@@ -13,9 +13,10 @@ var obj = {
 
 const { fn: f2 } = obj;
 
-f1(); //
-obj.fn(); //
-f2(); //
+// this 指向只和调用方式有关，this 是动态的不是静态的
+f1(); // 1
+obj.fn(); // 2
+f2(); // 1
 
 console.log(new obj.fn().x);
 

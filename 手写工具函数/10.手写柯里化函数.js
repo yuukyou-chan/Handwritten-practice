@@ -33,7 +33,7 @@ function curringAdd() {
   }
   return inner;
 }
-console.log(curringAdd(1, 2, 3)(4)(5)());
+// console.log(curringAdd(1, 2, 3)(4)(5)());
 
 // 实现add(1)(2)(3)
 function add() {
@@ -52,16 +52,44 @@ function add() {
   return inner;
 }
 
-// 通用版柯里化函数
+// 通用版柯里化函数 —— 固定长度参数
+// const curry = (fn) => {
+//   return function curried() {
+//     const params = Array.from(arguments);
+//     return function inner(...args) {
+//       if (args.length >= fn.length) {
+//         return fn.apply(this, params);
+//       } else {
+//         params.push(...args);
+//         return curried;
+//       }
+//     };
+//   };
+// };
+
 const curry = (fn) => {
   return function curried() {
     const params = Array.from(arguments);
-    return function inner(...args) {
-      if (args.length >= 1) {
-        params.push(...args);
-      } else {
-        return;
-      }
-    };
+    if (params.length >= fn.length) {
+      return fn.apply(this, params);
+    } else {
+      return function inner(...newArgs) {
+        params.push(...newArgs);
+        return curried.apply(this, params);
+      };
+    }
   };
 };
+
+// 定义一个简单的加法函数
+function add(a, b, c) {
+  return a + b + c;
+}
+
+// 使用 curry 函数将 add 函数柯里化
+const curriedAdd = curry(add);
+
+// 测试不同的调用方式
+console.log(curriedAdd(1, 2, 3)); // 输出: 6
+console.log(curriedAdd(1)(2)(3)); // 输出: 6
+console.log(curriedAdd(1, 2)(4)); // 输出: 6

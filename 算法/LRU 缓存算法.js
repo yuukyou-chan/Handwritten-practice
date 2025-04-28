@@ -37,6 +37,7 @@ class LRUCache {
       this.cache.delete(key);
     }
     if (this.cache.size >= this.capacity) {
+      // this.cache.keys().next().value 表示第一个key
       this.cache.delete(this.cache.keys().next().value);
     }
     this.cache.set(key, value);
