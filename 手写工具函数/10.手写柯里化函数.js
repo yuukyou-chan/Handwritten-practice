@@ -1,10 +1,3 @@
-function curryAdd(...args1) {
-  return function (...args2) {
-    const allArgs = [...args1, ...args2];
-    return;
-  };
-}
-
 // 实现
 // add(1,2,3,4)()
 // add(1)(2)(3)(4)()
@@ -75,6 +68,7 @@ const curry = (fn) => {
     } else {
       return function inner(...newArgs) {
         params.push(...newArgs);
+        // 需要递归重新判断参数长度是否满足
         return curried.apply(this, params);
       };
     }
@@ -90,6 +84,6 @@ function add(a, b, c) {
 const curriedAdd = curry(add);
 
 // 测试不同的调用方式
-console.log(curriedAdd(1, 2, 3)); // 输出: 6
-console.log(curriedAdd(1)(2)(3)); // 输出: 6
-console.log(curriedAdd(1, 2)(4)); // 输出: 6
+// console.log(curriedAdd(1, 2, 3)); // 输出: 6
+// console.log(curriedAdd(1)(2)(3)); // 输出: 6
+// console.log(curriedAdd(1, 2)(4)); // 输出: 6

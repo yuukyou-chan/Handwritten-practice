@@ -30,7 +30,7 @@ const flatWithQueue = (arr) => {
 
 // 方法2: 迭代法
 function flatWithStack(arr) {
-  const stack = [...arr];
+  const stack = [arr];
   const result = [];
 
   while (stack.length) {

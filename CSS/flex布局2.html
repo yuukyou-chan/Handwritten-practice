@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head></head>
+  <body>
+    <div class="container">
+      <!-- 百度1面 -->
+      <!-- 此时 三个子元素的宽高是多少？为什么？由什么属性决定的？  -->
+      <!-- 高180，宽0 ； -->
+      <!-- 默认值
+              flex-direction: row
+              flex-grow: 0    ——— 容器有剩余空间时不放大
+              flex-shrink: 1  ——— 容器空间不足时 等比缩小
+              align-items: stretch  ——— 容器高度拉伸到最大高度
+              -->
+      <div class="item"></div>
+    </div>
+  </body>
+  <style>
+    .container {
+      display: flex;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+    .item {
+      background-color: aliceblue;
+      width: 1000px;
+      height: 1000px;
+    }
+  </style>
+</html>

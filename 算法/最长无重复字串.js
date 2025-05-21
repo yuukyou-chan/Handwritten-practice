@@ -16,6 +16,7 @@ function lengthOfLongestSubstring(s) {
     const currentChar = s[right];
     if (
       charIndexMap.has(currentChar) &&
+      // 重复i服索引在left左边说明 之前记录的位置不在滑动窗口内，不是重复字符，不需要更新left
       charIndexMap.get(currentChar) >= left
     ) {
       left = charIndexMap.get(currentChar) + 1;
