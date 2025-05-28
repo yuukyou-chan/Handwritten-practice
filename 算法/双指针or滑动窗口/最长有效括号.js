@@ -12,6 +12,32 @@
 // 3.如果当前元素和栈顶元素不匹配，就清空栈，重新入栈
 // 4.边界条件判断：)() 如果栈长为 1，且栈顶元素为 )，就清空栈，重新入栈
 
+// 双指针
+const MathLength3 = (str) => {
+  let maxLength = 0;
+  let left = 0;
+  const arr = str.split("");
+  let stack = [];
+  for (let right = 0; right < arr.length; right++) {
+    if (
+      (stack[stack.length - 1] === ")" ||
+        stack[stack.length - 1] === undefined) &&
+      arr[right] === "("
+    ) {
+      stack.push(arr[right]);
+    } else if (stack[stack.length - 1] === "(" && arr[right] === ")") {
+      stack.push(arr[right]);
+      maxLength = Math.max(maxLength, stack.length);
+    } else {
+      // 不匹配的逻辑
+      left = right;
+      stack = [];
+      arr[right] === "(" && stack.push(arr[right]);
+    }
+  }
+  return maxLength;
+};
+
 const MathLength = (str) => {
   let maxLength = 0;
   let stack = [];
@@ -53,7 +79,7 @@ const MathLength = (str) => {
   return maxLength;
 };
 
-console.log(MathLength("()( ())"));
+console.log(MathLength3("())(()()())()()"));
 
 // leetCode 原题
 // 考虑 嵌套条件
