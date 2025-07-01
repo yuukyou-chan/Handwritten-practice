@@ -18,6 +18,8 @@
 2. 后序位置的代码 **可以获取到左右子树通过函数返回值传递回来的数据**
 
 某些情况下把代码移到后序位置效率最高；有些事情，只有后序位置的代码能做。
+例题:二叉树的直径 https://leetcode.cn/problems/diameter-of-binary-tree/
+二叉树转换为链表 https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/
 
 ## 基础代码模板
 
