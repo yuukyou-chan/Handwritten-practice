@@ -63,6 +63,7 @@ function add() {
 const curry = (fn) => {
   return function curried() {
     const params = Array.from(arguments);
+    // fn.length 获取 fn参数长度
     if (params.length >= fn.length) {
       return fn.apply(this, params);
     } else {
