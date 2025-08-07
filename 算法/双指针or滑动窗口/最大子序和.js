@@ -3,15 +3,17 @@
 //子数组 是数组中的一个连续部分。
 
 var maxSubArray = function (nums) {
-  let sum = 0;
-  let maxSum = 0;
+  let sum = nums[0];
+  let maxSum = nums[0];
 
-  for (let right = 0; right < nums.length; right++) {
-    sum += nums[right];
-    // 和为负数说明灰影响后面的累加，直接丢掉前面一堆
+  for (let right = 1; right < nums.length; right++) {
+    // 和为负数说明会影响响后面的累加，直接丢掉前面一堆
     if (sum < 0) {
-      sum = nums[++right];
+      sum = nums[right];
+    } else {
+      sum += nums[right];
     }
+
     maxSum = Math.max(sum, maxSum);
   }
 

@@ -42,7 +42,6 @@ function flatWithStack(arr) {
       result.unshift(next);
     }
   }
-
   return result;
 }
 
