@@ -44,3 +44,4 @@ function memorizeFunction(fn, deps) {
     return cachedResult;
   };
 }
+const a = 0

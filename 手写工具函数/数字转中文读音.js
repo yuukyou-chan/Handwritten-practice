@@ -57,3 +57,4 @@ function toChineseNum(num) {
 }
 console.log(toChineseNum(111180))
  // '一undefined一undefined一千一百八十'
+ const a = 2
