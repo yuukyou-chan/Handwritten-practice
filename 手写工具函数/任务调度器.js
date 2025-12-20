@@ -1,4 +1,4 @@
-// 百度二面  字节
+// 百度二面 字节 虾皮
 // Schedule 函数的作用是，将接收到的任务函数，在指定的时间间隔之后执行。
 // 具体来说，Schedule 函数接收两个参数：
 // 1、maxTaskCount：表示最大并发任务数。
@@ -25,10 +25,10 @@ class Schedule {
       this.runTask();
     });
   }
+
   runTask() {
     while (this.taskQueue.length && this.runningTaskCount < this.maxTaskCount) {
       const task = this.taskQueue.shift();
-
       task().finally((res) => {
         this.runningTaskCount--;
         this.runTask();

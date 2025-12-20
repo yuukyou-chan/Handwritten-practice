@@ -1,5 +1,5 @@
 // 打错特错
-Function._call(context) = function (context) {}
+Function._call(context) = function (context) { }
 
 
 Function.prototype._call = function (context) {
@@ -8,5 +8,4 @@ Function.prototype._call = function (context) {
   const res = context.fn(...args)
   delete context.fn
   return res
-
 }

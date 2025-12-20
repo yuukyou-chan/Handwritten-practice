@@ -6,6 +6,7 @@
 // 思路分析: 不要看到二维数组就动态规划、动态规划需要有状态转移
 // 这是一个搜索问题：深度优先搜索、广度优先搜索都可以做
 // 遍历二维数组、找到 1 就开始扩散搜索附近节点，注意去重将访问过的节点置为0，避免重复计算
+// 字节一面
 var maxAreaOfIsland = function (grid) {
   let maxS = 0;
 
@@ -23,6 +24,7 @@ var maxAreaOfIsland = function (grid) {
 
     return a + b + c + d + 1;
   }
+  
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       if (grid[i][j] === 1) {

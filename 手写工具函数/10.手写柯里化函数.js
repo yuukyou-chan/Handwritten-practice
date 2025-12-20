@@ -7,7 +7,6 @@
  * 1. 定义一个内部函数inner， 专门用于接收传进来的参数，每次都返回 inner函数接收参数
  * 2. 通过闭包变量来存所有接到的参数
  * 3. inner 函数通过参数长度判断 是否执行累加操作
- *
  */
 
 function curringAdd() {
@@ -60,20 +59,26 @@ function add() {
 //   };
 // };
 
+// 当前实现的问题分析：
+// 1. 参数污染：params数组在闭包中被共享，多次调用可能导致参数混乱
+// 2. 递归调用效率低：每次都重新创建params数组和inner函数
+// 3. fn.length局限性：无法处理默认参数和剩余参数
+
+// 改进后的柯里化函数
 const curry = (fn) => {
-  return function curried() {
-    const params = Array.from(arguments);
-    // fn.length 获取 fn参数长度
-    if (params.length >= fn.length) {
-      return fn.apply(this, params);
-    } else {
-      return function inner(...newArgs) {
-        params.push(...newArgs);
-        // 需要递归重新判断参数长度是否满足
-        return curried.apply(this, params);
-      };
+  // 使用递归方式实现参数累积
+  const curried = (...args) => {
+    // 如果参数足够，直接调用原函数
+    if (args.length >= fn.length) {
+      return fn.apply(this, args);
     }
+    // 否则返回一个新函数，继续收集参数
+    return (...moreArgs) => {
+      // 将新参数与已有参数合并，递归调用curried
+      return curried.apply(this, [...args, ...moreArgs]);
+    };
   };
+  return curried;
 };
 
 // 定义一个简单的加法函数

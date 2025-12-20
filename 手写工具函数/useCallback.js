@@ -45,3 +45,11 @@ function memorizeFunction(fn, deps) {
   };
 }
 const a = 0
+
+// 测试用例
+const add = (a, b) => a + b;
+const memoizedAdd = memorizeFunction(add, [a]);
+
+console.log(memoizedAdd(2, 3)); // 5，首次计算，缓存结果
+console.log(memoizedAdd(2, 3)); // 5，依赖未变化，返回缓存结果
+console.log(memoizedAdd(3, 4)); // 7，依赖变化，重新计算，缓存结果

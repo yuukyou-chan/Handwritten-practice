@@ -1,3 +1,4 @@
+// 实际上是树的遍历。树的遍历有两种，DFS（递归）、BFS（迭代）
 // 方法1 递归
 function flat(arr) {
   let res = [];

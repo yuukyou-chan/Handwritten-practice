@@ -11,6 +11,7 @@ var topKFrequent = function (nums, k) {
     }
   });
 
+  // Array.from 方法将 map 转换为数组，每个元素是一个键值对数组 [key, value]类似 [[3,1],[0,2],[1,1]]
   const mapArr = Array.from(map).sort((a, b) => {
     console.log(a, b, "a, b");
     return b[1] - a[1];
