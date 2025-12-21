@@ -1,3 +1,4 @@
+// 高途一面
 // 输出所有和为N的连续正数序列./
 // 输入一个正数N, 输出所有和为N的连续正数序列. 例如输入15, 结果: [[1, 2, 3, 4, 5], [4, 5, 6], [7, 8],]
 // https://leetcode.cn/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/description/

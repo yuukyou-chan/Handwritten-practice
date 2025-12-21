@@ -3,29 +3,44 @@
 
 const limitRequest = (fnArr, limit) => {
   return new Promise((resolve, reject) => {
-    let count = 0;
-    let currPosition = 0;
-    const resContainer = [];
+    const len = fnArr.length;
+    if (len === 0) return resolve([]);
 
-    const request = (position) => {
-      // console.log("当前位置", currPosition);
-      fnArr[currPosition]().then((res) => {
-        count--;
-        resContainer[position] = res;
-        if (count < limit && currPosition < fnArr.length) {
-          count++;
-          request(currPosition + 1);
-        }
-        if (currPosition === fnArr.length) {
-          return resolve(resContainer);
-        }
-      });
-      currPosition++;
+    const results = new Array(len);
+    let nextIndex = 0;      // 下一个待启动的任务索引
+    let completedCount = 0; // 已完成的任务总数
+
+    const run = () => {
+      // 1. 所有的任务都已经启动了，停止递归
+      if (nextIndex >= len) return;
+
+      // 2. 核心：通过闭包锁定当前的索引位置
+      // nextIndex++ 是先赋值后+1 此时currentIndex = 0
+      const currentIndex = nextIndex++; 
+      const task = fnArr[currentIndex];
+
+      task()
+        .then((res) => {
+          results[currentIndex] = res; // 确保结果顺序
+          completedCount++;
+
+          // 3. 只有当【所有】任务都执行完毕才 resolve
+          if (completedCount === len) {
+            resolve(results);
+          } else {
+            // 4. 一个任务结束，立刻拉取下一个任务进入执行池
+            run();
+          }
+        })
+        .catch((err) => {
+          reject(err); // 任何一个失败则整体失败
+        });
     };
 
-    for (let i = 0; i < limit; i++) {
-      count++;
-      request(currPosition);
+    // 5. 初始启动 limit 个并发任务
+    const initialCount = Math.min(limit, len);
+    for (let i = 0; i < initialCount; i++) {
+      run();
     }
   });
 };

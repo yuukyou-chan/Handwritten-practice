@@ -12,6 +12,7 @@ class SingletonCounter {
         // 实例状态（全局共享）
         this.count = 0;
         // 首次创建时绑定实例 ********** 重点
+        // 这个this 只得就是刚刚创建出来的对象，new 构造函数第一步就是在内部创建一个新对象
         SingletonCounter.#instance = this;
     }
 

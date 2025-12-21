@@ -20,10 +20,9 @@ class Observer {
   }
 
   off(name, fn) {
-    this.events[name] = this.events[name].filter((i) => i === fn);
-    if (!fn) {
-      delete this.events[name];
-    }
+    if (!this.events[name]) return;
+    this.events[name] = fn ? this.events[name].filter((i) => i !== fn) : [];
+    if (!this.events[name].length) delete this.events[name];
   }
 
   // 字面一面手撕：额外实现一个once方法，只执行一次，然后删除这个事件的监听

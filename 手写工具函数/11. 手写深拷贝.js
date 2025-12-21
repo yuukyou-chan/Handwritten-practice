@@ -16,7 +16,7 @@ function cloneDeep2(obj, map = new Map()) {
   if (map.has(obj)) return map.get(obj);
   Object.keys(obj).forEach((key) => {
     if (obj[key] instanceof Object) {
-      // map.set(obj, obj);  这样存的是同一个引用，所以需要存一个新的对象
+      // map.set(obj, obj);  这样的话新对象会指向旧对象，不符合深拷贝
       map.set(obj, newObj);
 
       newObj[key] = cloneDeep2(obj[key], map);

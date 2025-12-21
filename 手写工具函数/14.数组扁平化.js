@@ -12,6 +12,23 @@ function flat(arr) {
   }
   return res;
 }
+// 实现指定深度 扁平化函数 
+function DFSflat(arr,depth) {
+  let res = [];
+  let currDepth = 0
+  function dfs(arr) {
+    currDepth++
+    for (let i = 0; i < arr.length; i++) {
+      if (Array.isArray(arr[i]) && currDepth <= depth) {
+        dfs(arr[i]);
+      } else {
+        res.push(arr[i]);
+      }
+    }
+  }
+  dfs(arr);
+  return res;
+}
 
 // 不用递归还能用什么方式 ？迭代法
 // 队列会存在顺序不一致的问题
