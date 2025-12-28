@@ -13,20 +13,30 @@ function flat(arr) {
   return res;
 }
 // 实现指定深度 扁平化函数 
-function DFSflat(arr,depth) {
+function DFSflat(arr, depth = 1) {
   let res = [];
-  let currDepth = 0
-  function dfs(arr) {
-    currDepth++
-    for (let i = 0; i < arr.length; i++) {
-      if (Array.isArray(arr[i]) && currDepth <= depth) {
-        dfs(arr[i]);
+  
+  /**
+   * DFS 递归处理
+   * @param {Array} currArr 当前处理的数组
+   * @param {number} currDepth 当前深度
+   */
+  function dfs(currArr, currDepth) {
+    for (let i = 0; i < currArr.length; i++) {
+      const item = currArr[i];
+      // 如果是数组且当前深度小于指定深度，则继续展开
+      if (Array.isArray(item) && currDepth < depth) {
+        dfs(item, currDepth + 1);
       } else {
-        res.push(arr[i]);
+        // 否则直接推入结果数组（注意：原生 flat 会跳过空位，这里简单处理）
+        if (item !== undefined) {
+          res.push(item);
+        }
       }
     }
   }
-  dfs(arr);
+
+  dfs(arr, 0);
   return res;
 }
 

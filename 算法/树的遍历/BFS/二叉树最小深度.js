@@ -18,7 +18,8 @@ var minDepth = function(root) {
     while(queue.length) {
         // 必须用变量存储 当前队列长度，因为队列长度会在循环中改变
         const nums = queue.length
-        for(let i = 0;i < nums; i++){
+        // for循环便利当前层的所有节点
+        for(let i = 0;i < nums; i++) {
             const curr = queue.shift()
             if(curr.left === null && curr.right === null) {
                 return depth
@@ -26,6 +27,7 @@ var minDepth = function(root) {
             curr.left !== null && queue.push(curr.left)
             curr.right !== null && queue.push(curr.right)
         }
+        // for循环结束说明 当前层已经遍历完，深度+1
         depth++
     }
     return depth

@@ -3,6 +3,9 @@
  * @return {number[][]}
  */
 
+// 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。
+// 请你合并所有重叠的区间，并返回 一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间 。
+
 // 合并区间
 /**
  * 思路：
@@ -32,4 +35,33 @@ var merge = function (intervals) {
         }
     }
     return res
+};
+
+/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+var merge = function(intervals) {
+    if (intervals.length === 0) return [];
+
+    // 1. 按照左端点升序排序
+    intervals.sort((a, b) => a[0] - b[0]);
+
+    const res = [intervals[0]];
+
+    for (let i = 1; i < intervals.length; i++) {
+        const curr = intervals[i];
+        const last = res[res.length - 1];
+
+        // 2. 如果当前区间的左端点 <= 结果集中最后一个区间的右端点，说明重叠
+        if (curr[0] <= last[1]) {
+            // 合并：更新最后一个区间的右端点为两者中的较大值
+            last[1] = Math.max(last[1], curr[1]);
+        } else {
+            // 3. 不重叠，直接作为新区间加入
+            res.push(curr);
+        }
+    }
+
+    return res;
 };

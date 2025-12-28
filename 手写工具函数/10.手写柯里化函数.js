@@ -64,16 +64,17 @@ function add() {
 // 1. 参数污染：params数组在闭包中被共享，多次调用可能导致参数混乱
 // 2. 递归调用效率低：每次都重新创建params数组和inner函数
 // 3. fn.length局限性：无法处理默认参数和剩余参数
+
 // 腾讯微信小店 1 面
 // 改进后的柯里化函数
 const curry = (fn) => {
-  // 使用递归方式实现参数累积
+  // curried 函数作用是生成一个新的函数，传递给外边执行的，并且可以收集第一次参数
   const curried = (...args) => {
-    // 如果参数足够，直接调用原函数
+    // 如果参数足够，直接调用原函数 ；fn.length: 获取函数传入参数的长度
     if (args.length >= fn.length) {
       return fn.apply(this, args);
     }
-    // 否则返回一个新函数，继续收集参数
+    // 此新函数，作用：连续收集参数
     return (...moreArgs) => {
       // 将新参数与已有参数合并，递归调用curried
       return curried.apply(this, [...args, ...moreArgs]);

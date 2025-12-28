@@ -11,30 +11,38 @@
  */
 // https://leetcode.cn/problems/combination-sum/
 var combinationSum = function (candidates, target) {
-  let path = [];
   const res = [];
+  const path = [];
   let sum = 0;
+  
+  // 排序是为了后续剪枝优化
   candidates.sort((a, b) => a - b);
 
-  function backTracing(path) {
+  function backTracing(startIndex) {
+    // 终止条件
     if (sum === target) {
       res.push([...path]);
       return;
     }
-    for (let i = 0; i < candidates.length; i++) {
+
+    for (let i = startIndex; i < candidates.length; i++) {
+      // 剪枝：如果当前 sum 加上这个数已经超过 target，因为数组已排序，后面的数更不用看了
+      if (sum + candidates[i] > target) break;
+
+      // 做选择
       sum += candidates[i];
-      if (sum > target) {
-        sum = 0;
-        path = [];
-        continue;
-      }
       path.push(candidates[i]);
-      backTracing(path);
+
+      // 递归：传入 i 而不是 i + 1，表示可以重复使用当前数字
+      backTracing(i);
+
+      // 回溯：撤销选择，状态恢复必须完全对称
       sum -= candidates[i];
-      path.pop(candidates[i]);
+      path.pop();
     }
   }
-  backTracing(path);
+
+  backTracing(0);
   return res;
 };
 
