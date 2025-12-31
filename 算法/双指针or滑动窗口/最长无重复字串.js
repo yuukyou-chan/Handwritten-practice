@@ -24,6 +24,7 @@ function lengthOfLongestSubstring(s) {
     charIndexMap.set(currentChar, right);
     maxLength = Math.max(maxLength, right - left + 1);
   }
+  
 }
 
 // 暴力解法 时间复杂度 O(n^2) 无法通过 leetCode

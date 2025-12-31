@@ -43,6 +43,7 @@ const useRequestConcurrency = (maxConcurrency) => {
 
       // 判断是否直接执行或加入队列
       if (currentRunning.current < maxConcurrency) {
+        // 没有用while 循环的原因是，当前执行到了最大并发数，直接在任务的回调函数里再执行就能保证一直的最大并发数
         executeTask(task); // 并发数没超，直接执行
       } else {
         requestQueue.current.push(task); // 并发数超了，加入队列
