@@ -26,7 +26,7 @@ class Observer {
   }
 
   // 字面一面手撕：额外实现一个once方法，只执行一次，然后删除这个事件的监听
-  // 申通一面
+  // 申通一面 有道一面
   once(name, fn) {
     const onceFn = () => {
       fn();
