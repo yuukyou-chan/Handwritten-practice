@@ -10,6 +10,7 @@ function calculateElephantDP(n) {
     dp[2] = 3
     dp[3] = 3
     for (let i = 4; i <= n; i++) {
+        // 第i年的大象数量 = 上一年剩余的大象（老的大象） + 前三年生产的大象（新增的大象）
         dp[i] = dp[i - 1] + dp[i - 3] * 2
     }
     return dp[n]

@@ -11,6 +11,10 @@ class Schedule {
     this.taskQueue = [];
     this.runningTaskCount = 0;
   }
+
+  // addTask 做两件事：
+  // 1. 把任务函数包装成一个 Promise，放到任务队列中。
+  // 2. 调用 runTask 方法，尝试执行任务。
   addTask(params, delay) {
     return new Promise((resolve, reject) => {
       this.taskQueue.push(
@@ -26,8 +30,12 @@ class Schedule {
     });
   }
 
+  // runTask 做两件事：
+  // 1. 从任务队列中取出任务函数。
+  // 2. 调用任务函数，执行任务。
   runTask() {
-    while (this.taskQueue.length && this.runningTaskCount < this.maxTaskCount) {
+    // 把 if 换成 while 也可以
+    if (this.taskQueue.length && this.runningTaskCount < this.maxTaskCount) {
       const task = this.taskQueue.shift();
       task().finally((res) => {
         this.runningTaskCount--;

@@ -2,7 +2,7 @@
 function compareVertion(v1,v2) {
     const v1Arr = v1.split('.').map(Number)
     const v2Arr = v2.split('.').map(Number) 
-    const maxLen = Math.max(v1Arr.length,v2Arr.length)  
+    const maxLen = Math.max(v1Arr.length,v2Arr.length)
     
     for(let i = 0; i < maxLen; i++) {
       // 缺位补0
